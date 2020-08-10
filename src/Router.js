@@ -21,11 +21,11 @@ function Router(props) {
                     headerRight: () => (
                         <TouchableOpacity
                         onPress={() => navigation.navigate('ListDetail')}
-                        style={{ 
+                        style={{ 
                             marginRight: 20
                         }}
                         >
-                            <Text style={{ fontSize: 30}}>+</Text>
+                            <Text style={{ fontSize: 30}}>+</Text>
                         </TouchableOpacity>
                       ),
                 })}
