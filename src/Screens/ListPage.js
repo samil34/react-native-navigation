@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import {
     Text, View, StyleSheet, TouchableOpacity, FlatList,
     SafeAreaView, KeyboardAvoidingView,
-    Platform, RefreshControl
+    Platform, RefreshControl, processColor
 } from 'react-native';
+import { connect, useDispatch } from 'react-redux'
 import { Input, Button } from '../Components'
 const ListPage = (props) => {
 
@@ -19,7 +20,6 @@ const ListPage = (props) => {
             setData(arr)
         }
         
-
     }, [props.route.params?.obj])
 
     const renderItem = ({ item }) => (
@@ -39,7 +39,7 @@ const ListPage = (props) => {
 
                 <FlatList
                     style={{ flex: 1 }}
-                    data={data}
+                    data={props.list}
                     renderItem={renderItem}
                     keyExtractor={item => item.title}
                     ListEmptyComponent={() => {
@@ -95,4 +95,12 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ListPage;
+const mapStateToProps = (state) => {
+    console.log('Gelen data: ', state);
+    const { list, loading, data } = state.listResponse;
+    return { list, list, loading, data };
+};
+
+export default connect( mapStateToProps, {  } )(ListPage);
+
+

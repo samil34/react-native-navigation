@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { Text, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { Text, View, 
+    üKeyboardAvoidingView, Platform, ScrollView, ActivityIndicator } from 'react-native';
 
 import { Input, Button } from '../Components'
+import { connect, useDispatch } from 'react-redux';
+import { LOADING_START, LOADING_END, UPDATE_LIST } from '../actions/types';
 
 
 const ListDetail = (props) => {
+
+    const dispatch = useDispatch()
 
     const [title, setTitle] = useState()
     const [dsc, setDsc] = useState()
@@ -34,21 +39,34 @@ const ListDetail = (props) => {
                     text={'Add'}
                     style={{ height: 40 }}
                     onPress={() => {
-                        // let arr = data.slice()
                         let obj = {
                             title,
                             dsc
                         };
-                        // arr.push(obj)
+                        dispatch({ type: UPDATE_LIST, payload: obj })
+                        props.navigation.pop();
+                        
+                        // props.navigation.navigate('List', { obj });
+                        // dispatch({ type: LOADING_START, payload: true })
 
-                        // setData(arr)
+                        // setTimeout(() => {
+                        //     // 2 saniye sonra çalış.
+                        //     dispatch({ type: LOADING_END, payload: false })
+                        // }, 2000)
 
-                        props.navigation.navigate('List', { obj });
                     }}
                 />
+
+                {props.loading && <ActivityIndicator size='large' style={{ marginTop: 30}} />}
             </View>
         </ScrollView>
     );
 }
 
-export default ListDetail;
+
+const mapStateToProps = ({ listResponse }) => {
+    const { list, loading } = listResponse;
+    return { list, loading };
+};
+
+export default connect( mapStateToProps, { } )(ListDetail);
