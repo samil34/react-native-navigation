@@ -6,13 +6,14 @@ import {
 } from 'react-native';
 import { connect, useDispatch } from 'react-redux'
 import { Input, Button } from '../Components'
+
 const ListPage = (props) => {
 
 
     const [data, setData] = useState([])
 
     useEffect(() => {
-        console.log('Gelen Depğer: ', props.route.params?.obj);
+        console.log('Gelen Değer: ', props.route.params?.obj);
 
         if(props.route.params?.obj) {
             let arr = data.slice()
@@ -21,13 +22,60 @@ const ListPage = (props) => {
         }
         
     }, [props.route.params?.obj])
-
+    
+    
+    
     const renderItem = ({ item }) => (
+
+          
+        
+            /* 
         <View style={styles.item}>
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.dsc}>{item.dsc}</Text>
+            <Text style={styles.dsc}>{item.date}</Text>
         </View>
+       */
+        <TouchableOpacity
+        style={styles.item, {height: 150, width: '90%'}}
+        onPress={() => {
+            let obj = {
+                title,
+                dsc,
+                date
+            };
+            dispatch({ type: UPDATE_LIST, payload: obj })
+            props.navigation.pop();
+            
+            // props.navigation.navigate('List', { obj });
+            // dispatch({ type: LOADING_START, payload: true })
+
+            // setTimeout(() => {
+            //     // 2 saniye sonra çalış.
+            //     dispatch({ type: LOADING_END, payload: false })
+            // }, 2000)
+
+        }}
+       
+>
+
+<View style={styles.item}>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.dsc}>{item.dsc}</Text>
+            <Text style={styles.dsc}>{item.date}</Text>
+        </View>
+    
+    </TouchableOpacity>
+
+       
+         
+
+        
+        
     );
+
+    {props.loading && <ActivityIndicator size='large' style={{ marginTop: 30}} />}
+   
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -72,6 +120,8 @@ const ListPage = (props) => {
     )
 }
 
+
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -83,7 +133,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         borderWidth: 0.5,
         borderRadius: 10,
-        borderColor: 'gray'
+        borderColor: 'gray',
+        
 
     },
     title: {

@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ListPage from './Screens/ListPage'
 import ListDetail from './Screens/ListDetail'
+import UpdateScreen from './Screens/UpdateScreen'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
@@ -20,7 +21,7 @@ function Router(props) {
                     title: 'Todo List',
                     headerRight: () => (
                         <TouchableOpacity
-                        onPress={() => navigation.navigate('ListDetail')}
+                        onPress={() => navigation.navigate('ListPage')}
                         style={{ 
                             marginRight: 20
                         }}
@@ -36,6 +37,12 @@ function Router(props) {
                 name="ListDetail" 
                 component={ListDetail} 
                 options={{ title: 'Add Todo List'}}
+                />
+
+                <Stack.Screen 
+                name="UpdateScreen" 
+                component={UpdateScreen} 
+                options={{ title: 'Update'}}
                 />
 
             

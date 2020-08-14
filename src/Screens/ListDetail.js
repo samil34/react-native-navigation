@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, 
     üKeyboardAvoidingView, Platform, ScrollView, ActivityIndicator } from 'react-native';
 
-import { Input, Button } from '../Components'
+import { Input, Button, ButtonUpdate } from '../Components'
 import { connect, useDispatch } from 'react-redux';
 import { LOADING_START, LOADING_END, UPDATE_LIST } from '../actions/types';
 
@@ -13,6 +13,7 @@ const ListDetail = (props) => {
 
     const [title, setTitle] = useState()
     const [dsc, setDsc] = useState()
+    const [date, setDate] = useState()
 
 
     return (
@@ -34,6 +35,11 @@ const ListDetail = (props) => {
                     value={dsc}
                     onChangeText={(value) => setDsc(value)}
                 />
+                <Input
+                    placeholder='Date'
+                    value={date}
+                    onChangeText={(value) => setDate(value)}
+                />
 
                 <Button
                     text={'Add'}
@@ -41,7 +47,8 @@ const ListDetail = (props) => {
                     onPress={() => {
                         let obj = {
                             title,
-                            dsc
+                            dsc,
+                            date
                         };
                         dispatch({ type: UPDATE_LIST, payload: obj })
                         props.navigation.pop();
