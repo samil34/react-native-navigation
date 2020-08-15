@@ -23,12 +23,21 @@ const ListPage = (props) => {
         
     }, [props.route.params?.obj])
     
-    
+  const deleteItem = (key) => {
+       this.setState(
+           {
+               data:
+               [
+                   ...this.state.data.filter((item) =>
+                   item.key !== key)
+                   
+               ]
+           }
+       )
+   }
     
     const renderItem = ({ item }) => (
 
-          
-        
             /* 
         <View style={styles.item}>
             <Text style={styles.title}>{item.title}</Text>
@@ -59,7 +68,15 @@ const ListPage = (props) => {
        
 >
 
-<View style={styles.item}>
+        <View style={styles.item}>
+            <TouchableOpacity style = {{marginLeft: 225}}
+            
+            >
+                <View style = {{justifyContent: 'center', alignItems: 'center', backgroundColor: 'red', width: 60, height: 30, borderRadius: 5, borderWidth:0.8}}>
+            <Text style = {{  fontSize: 18,  color: 'white' }}>Delete</Text>
+            </View>
+            </TouchableOpacity>
+
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.dsc}>{item.dsc}</Text>
             <Text style={styles.dsc}>{item.date}</Text>
@@ -114,6 +131,8 @@ const ListPage = (props) => {
                     }}
                     initialNumToRender={2}
                 />
+
+
 
             </KeyboardAvoidingView>
         </SafeAreaView>

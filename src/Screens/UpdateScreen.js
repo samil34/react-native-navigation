@@ -42,19 +42,7 @@ const UpdateScreen = (props) => {
 
 {props.loading && <ActivityIndicator size='large' style={{ marginTop: 30}} />}
 
-return (
-    <SafeAreaView style={{ flex: 1 }}>
-
-        <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-            style={{ flex: 1 }}
-        >
-
-            <Text>hello</Text>
-
-        </KeyboardAvoidingView>
-    </SafeAreaView>
-)
+/*return*/
 }
 
 

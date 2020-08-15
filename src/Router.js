@@ -21,12 +21,12 @@ function Router(props) {
                     title: 'Todo List',
                     headerRight: () => (
                         <TouchableOpacity
-                        onPress={() => navigation.navigate('ListPage')}
-                        style={{ 
+                        onPress={() => navigation.navigate('ListDetail')}
+                        style={{ 
                             marginRight: 20
                         }}
                         >
-                            <Text style={{ fontSize: 30}}>+</Text>
+                            <Text style={{ fontSize: 30}}>+</Text>
                         </TouchableOpacity>
                       ),
                 })}
@@ -39,8 +39,8 @@ function Router(props) {
                 options={{ title: 'Add Todo List'}}
                 />
 
-                <Stack.Screen 
-                name="UpdateScreen" 
+               <Stack.Screen 
+                name="Update" 
                 component={UpdateScreen} 
                 options={{ title: 'Update'}}
                 />
