@@ -8,6 +8,7 @@ const Input = (props) => (
         placeholder={props.placeholder}
         secureTextEntry={props.secureTextEntry}
         keyboardType={props.keyboardType}
+        multiline={props.multiline}
         value={props.value}
         onChangeText={(value) => props.onChangeText(value)}
         style={[{

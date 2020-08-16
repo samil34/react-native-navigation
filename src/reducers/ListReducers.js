@@ -1,45 +1,66 @@
-import { GET_LIST, LOADING_END, LOADING_START, UPDATE_LIST } from '../actions/types';
+import {
+    LIST_START,
+    LIST_SUCCESS,
+    LIST_FAILD,
+
+    ADD_ITEM_START,
+    ADD_ITEM_SUCCESS,
+    ADD_ITEM_FAILD,
+
+} from '../actions/types';
 
 const INITIAL_STATE = {
-  list: [],
-  loading: false,
+    loadingCharacter: false,
+    loadingAddItem: false,
+    characters: []
 };
 export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+    switch (action.type) {
 
-    case LOADING_START:
-      return {
-        ...state,
-        loading: action.payload,
-      };
-
-
-    case LOADING_END:
-      return {
-        ...state,
-        loading: action.payload,
-      };
+        case LIST_START:
+            return {
+                ...state,
+                loadingCharacter: true,
+            };
 
 
-    case UPDATE_LIST:
-      const obj = action.payload;
-      let arr = state.list.slice()
-      arr.push(obj)
+        case LIST_SUCCESS:
+            return {
+                ...state,
+                loadingCharacter: false,
+                characters: action.payload.characters
+            };
 
-      return {
-        ...state,
-        list: arr,
-      };
-
-
-    case GET_LIST:
-      return {
-        ...state,
-        list: action.payload,
-      };
+        case LIST_FAILD:
+            return {
+                ...state,
+                loadingCharacter: false,
+            };
 
 
-    default:
-      return state;
-  }
+        case ADD_ITEM_START:
+            return {
+                ...state,
+                loadingAddItem: true,
+            };
+
+
+        case ADD_ITEM_SUCCESS:
+            const newItem = action.payload.newCharacter
+
+            return {
+                ...state,
+                loadingAddItem: false,
+                characters: [...state.characters, newItem]
+            };
+
+        case ADD_ITEM_FAILD:
+            return {
+                ...state,
+                loadingAddItem: false,
+            };
+
+        default:
+            return state;
+    }
 };
